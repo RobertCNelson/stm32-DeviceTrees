@@ -25,15 +25,9 @@
 		stdout-path = "serial0:115200n8";
 	};
 
-	wlan_pwr: regulator-wlan {
-		compatible = "regulator-fixed";
-
-		regulator-name = "wl-reg";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-
-		gpios = <&gpioh 4 GPIO_ACTIVE_HIGH>;
-		enable-active-high;
+	wifi_pwrseq: wifi-pwrseq {
+		compatible = "mmc-pwrseq-simple";
+		reset-gpios = <&gpioh 4 GPIO_ACTIVE_LOW>;
 	};
 };
 
@@ -109,11 +103,12 @@
 	pinctrl-0 = <&sdmmc2_b4_pins_b>;
 	pinctrl-1 = <&sdmmc2_b4_od_pins_b>;
 	pinctrl-2 = <&sdmmc2_b4_sleep_pins_a>;
-	broken-cd;
 	non-removable;
 	st,neg-edge;
 	bus-width = <4>;
-	vmmc-supply = <&wlan_pwr>;
+	vmmc-supply = <&v3v3>;
+	mmc-pwrseq = <&wifi_pwrseq>;
+	keep-power-in-suspend;
 	status = "okay";
 
 	#address-cells = <1>;
