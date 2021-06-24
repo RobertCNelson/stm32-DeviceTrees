@@ -23,6 +23,8 @@
 		serial1 = &usart3;
 		serial2 = &uart7;
 		serial3 = &usart2;
+		spi0 = &spi4;
+		spi1 = &spi5;
 	};
 
 	chosen {
@@ -141,5 +143,33 @@
 		max-speed = <3000000>;
 		vbat-supply = <&v3v3>;
 		vddio-supply = <&v3v3>;
+	};
+};
+
+&spi4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi4_pins_b>;
+	cs-gpios = <&gpioe 11 GPIO_ACTIVE_HIGH>;
+	status = "okay";
+
+	spidev@0 {
+		compatible = "spidev";
+		reg = <0>;
+		spi-max-frequency = <4000000>;
+		st,spi-midi-ns = <4000>;
+	};
+};
+
+&spi5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi5_pins_a>;
+	cs-gpios = <&gpiof 6 GPIO_ACTIVE_HIGH>;
+	status = "okay";
+
+	spidev@0 {
+		compatible = "spidev";
+		reg = <0>;
+		spi-max-frequency = <4000000>;
+		st,spi-midi-ns = <4000>;
 	};
 };
