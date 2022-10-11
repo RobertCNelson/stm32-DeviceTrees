@@ -111,4 +111,14 @@
 	/delete-property/dmas;
 	/delete-property/dma-names;
 	status = "okay";
+
+	hts221@5f {
+		compatible = "st,hts221";
+		reg = <0x5f>;
+	};
+
+	lsm6dso@6b {
+		compatible = "st,lsm6dso";
+		reg = <0x6b>;
+	};
 };
